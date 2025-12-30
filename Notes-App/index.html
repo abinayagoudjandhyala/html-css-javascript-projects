@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="logo">
+        <!-- Nice notes icon (no external image, pure CSS/emoji) -->
+        <span class="logo-icon">📝</span>
+      </div>
+      <h1 class="app-title">Notes</h1>
+    </header>
+
+    <button id="toggleCreateBtn" class="primary-btn">
+      + Create Note
+    </button>
+
+    <!-- Hidden note input card (shows when button is clicked) -->
+    <div id="noteInputCard" class="note-input-card hidden">
+      <textarea
+        id="noteInput"
+        rows="3"
+        placeholder="Write your note here..."
+      ></textarea>
+      <button id="addNoteBtn" class="primary-btn">
+        Save Note
+      </button>
+    </div>
+
+    <div id="notesContainer" class="notes-container">
+      <p class="empty-text">No notes yet. Click “Create Note” to add one!</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

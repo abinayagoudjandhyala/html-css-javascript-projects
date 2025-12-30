@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Gemstones&display=swap" rel="stylesheet">
+    <style>
+        .results-container {
+            text-align: center;
+            color: white;
+        }
+        
+        .results-container h1 {
+            font-family: "Rubik Gemstones", system-ui;
+            color: #FFD700;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hrline {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            margin: 20px 0;
+        }
+        
+        .score-display {
+            margin: 40px 0;
+        }
+        
+        .score-display h2 {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .score-display p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .score-display p span {
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .score-circle {
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+        
+        .result-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .result-actions button {
+            background: rgba(255, 215, 0, 0.8);
+            color: #0f0f1a;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 200px;
+        }
+        
+        .result-actions button:hover {
+            background: #FFD700;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .result-actions button:last-child {
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFD700;
+            border: 1px solid #FFD700;
+        }
+        
+        .result-actions button:last-child:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+        
+        .superhero-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #FFD700;
+            margin: 20px auto;
+        }
+        
+        .feedback-message {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body class="quiz-bg">
+    <div class="quiz-container">
+        <div class="results-container">
+            <h1>Quiz Results</h1>
+            <div class="hrline"></div>
+            
+            
+            <div class="feedback-message" id="feedback"></div>
+            
+            <div class="score-display">
+                <h2>Your Score</h2>
+                <p><span id="final-score">0</span> out of <span id="total-questions">5</span></p>
+                <div class="score-circle">
+                    <svg width="200" height="200" viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="90" fill="none" stroke="#333" stroke-width="10"/>
+                        <circle id="score-circle" cx="100" cy="100" r="90" fill="none" stroke="#FFD700" stroke-width="10" 
+                                stroke-dasharray="565.48" stroke-dashoffset="565.48" transform="rotate(-90 100 100)"/>
+                        <text x="100" y="110" text-anchor="middle" font-size="40" fill="#FFD700" id="percentage">0%</text>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="result-actions">
+                <button onclick="retakeQuiz()">🔄 Retake Quiz</button>
+                <button onclick="goHome()">🏠 Choose Another Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Display results
+        const finalScore = parseInt(localStorage.getItem('finalScore')) || 0;
+        const totalQuestions = parseInt(localStorage.getItem('totalQuestions')) || 5;
+        const quizType = localStorage.getItem('quizType');
+        const percentage = Math.round((finalScore / totalQuestions) * 100);
+    
+        // Set feedback message
+        const feedbackEl = document.getElementById('feedback');
+        if (percentage >= 80) {
+            feedbackEl.textContent = "Superhero Status: Legendary! 🦸‍♂️";
+        } else if (percentage >= 60) {
+            feedbackEl.textContent = "Great Job! Hero in Training 🚀";
+        } else if (percentage >= 40) {
+            feedbackEl.textContent = "Not Bad! Keep Practicing 💪";
+        } else {
+            feedbackEl.textContent = "Time to Study Your Heroes! 📚";
+        }
+        
+        document.getElementById('final-score').textContent = finalScore;
+        document.getElementById('total-questions').textContent = totalQuestions;
+        document.getElementById('percentage').textContent = `${percentage}%`;
+        
+        // Animate score circle
+        const circle = document.getElementById('score-circle');
+        const circumference = 565.48; // 2 * π * r (where r = 90)
+        const offset = circumference - (percentage / 100) * circumference;
+        
+        setTimeout(() => {
+            circle.style.strokeDashoffset = offset;
+        }, 100);
+        
+        // Button functions
+        function retakeQuiz() {
+            window.location.href = "quiz.html";
+        }
+        
+        function goHome() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

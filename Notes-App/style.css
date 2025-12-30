@@ -1,0 +1,188 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  /* Nice gradient background */
+  background: linear-gradient(135deg, #4158d0, #c850c0, #ffcc70);
+}
+
+/* Main app card */
+.app {
+  background: #ffffff;
+  width: 100%;
+  max-width: 600px;
+  padding: 24px 20px 28px;
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* Round notes icon */
+.logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top left, #ffcc70, #ff7eb3, #6a85ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.logo-icon {
+  font-size: 32px;
+}
+
+.app-title {
+  font-size: 28px;
+  color: #333;
+}
+
+/* Primary button (Create Note + Save Note) */
+.primary-btn {
+  display: inline-block;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 999px; /* fully rounded */
+  background: linear-gradient(135deg, #6a85ff, #7f53ac);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
+}
+
+.primary-btn:hover {
+  opacity: 0.95;
+}
+
+.primary-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+/* Center the Create Note button */
+#toggleCreateBtn {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Card that appears when creating notes */
+.note-input-card {
+  background: #f7f8ff;
+  border-radius: 16px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(106, 133, 255, 0.3);
+}
+
+#noteInput {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #d0d4ff;
+  padding: 10px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+/* Notes list */
+.notes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.note {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.note-text {
+  flex: 1;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Delete button */
+.delete-btn {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #ff4b4b;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(255, 75, 75, 0.3);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
+}
+
+.delete-btn:hover {
+  opacity: 0.9;
+}
+
+.delete-btn:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 2px 6px rgba(255, 75, 75, 0.4);
+}
+
+/* Empty text */
+.empty-text {
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+}
+
+/* Utility */
+.hidden {
+  display: none;
+}
+
+/* Responsive */
+@media (min-width: 600px) {
+  .app {
+    padding: 28px 26px 32px;
+  }
+
+  .note-input-card {
+    flex-direction: column;
+  }
+
+  .primary-btn {
+    align-self: flex-end;
+    width: auto;
+  }
+}

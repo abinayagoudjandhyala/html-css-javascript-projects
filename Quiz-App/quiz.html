@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUPERHERO QUIZ</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Gemstones&display=swap" rel="stylesheet">
+</head>
+<body class="quiz-bg">
+    <div class="quiz-container">
+        <header class="quiz-header">
+            <button id="quit-btn" onclick="quitQuiz()">🚪 Quit</button>
+            <div class="quiz-info">
+                <div class="quiz-progress">
+                    <span id="question-counter">1/5</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="quiz-score">
+                    ⭐ <span id="score">0</span>/5
+                </div>
+            </div>
+        </header>
+
+        <main class="quiz-main">
+            <div class="question-container">
+                <p id="question-text">Loading question...</p>
+            </div>
+
+            <div class="options-container">
+                <button class="option-btn" onclick="selectOption(1)">
+                    <span class="option-letter">A</span>
+                    <span class="option-text">Option 1</span>
+                </button>
+                <button class="option-btn" onclick="selectOption(2)">
+                    <span class="option-letter">B</span>
+                    <span class="option-text">Option 2</span>
+                </button>
+                <button class="option-btn" onclick="selectOption(3)">
+                    <span class="option-letter">C</span>
+                    <span class="option-text">Option 3</span>
+                </button>
+                <button class="option-btn" onclick="selectOption(4)">
+                    <span class="option-letter">D</span>
+                    <span class="option-text">Option 4</span>
+                </button>
+            </div>
+        </main>
+
+        <footer class="quiz-footer">
+            <button id="prev-btn" onclick="prevQuestion()">⬅ Previous</button>
+            <button id="next-btn" onclick="nextQuestion()">Next ➡</button>
+        </footer>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>

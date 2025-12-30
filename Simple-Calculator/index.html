@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body{
+    font-family: open Sans;
+    background-color: #def0ff;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+.calculator{
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0, 0,0.1);
+    width: 360px;
+}
+
+#display{
+    width: 100%;
+    padding: 2px;
+    font-size: 26px;
+    margin-bottom: 15px;
+    text-align: right;
+    border: none;
+    background-color: #94aec3;
+    box-shadow: 0 0 3px #ccc;
+    color: #fff
+}
+
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+}
+
+button{
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover{
+    background-color: #ccc;
+}
+
+#history-list{
+    list-style: none;
+    padding-left: 0;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+#history-list li{
+    font-family: open Sans;
+    background-color: #8393a0;
+    margin-bottom: 6px;
+    padding: 8px 10px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #94aec3;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #e4d4d4;
+    transition: background-color 0.3s;
+}
+
+#history-list li:hover{
+     background-color: #61ace9;
+}
+
+#history-list li button{
+    background: none;
+    color: red;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id = "display" readonly >
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button onclick="addToDisplay('^')">^</button>
+            <button onclick="addToDisplay('/')">/</button>
+            
+            <button onclick="addToDisplay('7')">7</button>
+            <button onclick="addToDisplay('8')">8</button>
+            <button onclick="addToDisplay('9')">9</button>
+            <button onclick="addToDisplay('*')">*</button>
+            
+            <button onclick="addToDisplay('4')">4</button>
+            <button onclick="addToDisplay('5')">5</button>
+            <button onclick="addToDisplay('6')">6</button>
+            <button onclick="addToDisplay('-')">-</button>
+            
+            <button onclick="addToDisplay('3')">3</button>
+            <button onclick="addToDisplay('2')">2</button>
+            <button onclick="addToDisplay('1')">1</button>
+            <button onclick="addToDisplay('+')">+</button>
+            
+            <button onclick="addToDisplay('0')">0</button>
+            <button onclick="addToDisplay('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="sqrt()">√</button>
+        </div>
+        <div class="histor-section">
+            <ul id="history-list">
+                
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    let display = document.getElementById("display")
+let historyList = document.getElementById("history-list");
+let history = []
+
+function addToDisplay(pvalue) {
+    display.value += pvalue;
+}
+
+function clearDisplay(){
+    display.value ="";
+}
+
+function deleteLast(){
+    display.value = display.value.slice(0,-1);
+}
+
+function sqrt()
+{
+    let value = parseFloat(display.value);
+    if(!isNaN(value))
+    {
+        let result = Math.sqrt(value);
+        addToHistory(`√${value} = ${result}`);
+        display.value = result;
+    }
+}
+
+
+function calculate()
+{
+    let expression= display.value.replace(/\^/g,"**");
+    let result = eval(expression);
+    addToHistory(`${display.value} = ${result}`); // "2+3 = 5"
+    display.value = result;
+}
+
+function addToHistory(entry)// "2+3 = 5"
+{
+    if(history.length ==10 )
+        history.pop(); //keep only 10 value
+    history.unshift(entry);//["2+3 = 5","6*5 = 30"]
+    updateHistoryUI();
+}
+function updateHistoryUI(){
+    historyList.innerHTML ="";
+    history.forEach(
+        //"2+3 = 5"
+        (item,index) =>{
+        let li = document.createElement("li");
+        li.textContent = item;
+        let equation = item.split(" = ")[0];//["2+3","5"]
+        li.onclick = ()=>{
+            display.value = equation;
+        };
+        let deletebtn = document.createElement('button');
+        deletebtn.textContent = 'x';
+        deletebtn.onclick =() =>{
+            history.splice(index,1);
+            updateHistoryUI();
+        }
+
+        li.appendChild(deletebtn);
+        historyList.appendChild(li);
+    });
+
+}
+</script>
+</html>

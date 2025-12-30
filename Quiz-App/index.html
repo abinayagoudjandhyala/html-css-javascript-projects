@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUPERHERO QUIZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="fullbg">
+    <div class="container">
+        <div class="header">
+            <h1>The Superhero Quiz</h1>
+            <div class="hrline1"></div>
+            <p>Choose a Card to start</p>
+            <div class="hrline2"></div>
+        </div>
+        
+        <div class="cards-container">
+            <div class="card" onclick="openquiz('marvel')">
+                <img src="Images/marvel.jpeg" alt="Marvel logo">
+            </div>
+            <div class="card" onclick="openquiz('dc')">
+                <img src="Images/dc.jpg" alt="DC logo">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const openquiz = (quizname) => {
+            localStorage.clear();
+            localStorage.setItem('quiztype', quizname);
+            localStorage.setItem('questionNumber', 1);
+            localStorage.setItem('score', 0);
+            window.location.href = "quiz.html";
+        }
+    </script>
+</body>
+</html>
