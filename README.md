@@ -1,0 +1,1 @@
+This repository is a collection of my HTML, CSS, and JavaScript projects. It includes small practice projects and mini applications created to improve my frontend web development skills and experiment with different UI and JavaScript concepts.
